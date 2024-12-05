@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Ensure necessary directories are created
-RUN mkdir -p plugins qBittorrent/config sabnzbdapi tghbot web
+RUN mkdir -p myjd py_generators qBittorrent/config sabnzbd sabnzbdapi tghbot web
 
 # dor updating Old Pip 
 RUN python3 -m pip install -U pip
