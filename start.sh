@@ -3,6 +3,7 @@
 # Check if directories exist, if not, create them
 [ ! -d "myjd" ] && mkdir myjd
 [ ! -d "py_generators" ] && mkdir py_generators
+[ ! -d "qBittorrent/config" ] && mkdir qBittorrent/config
 [ ! -d "sabnzbd" ] && mkdir sabnzbd
 [ ! -d "sabnzbdapi" ] && mkdir sabnzbdapi
 [ ! -d "tghbot" ] && mkdir tghbot
