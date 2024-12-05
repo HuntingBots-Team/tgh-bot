@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Check if directories exist, if not, create them
-[ ! -d "plugins" ] && mkdir plugins
-[ ! -d "qBittorrent/config" ] && mkdir qBittorrent/config
+[ ! -d "myjd" ] && mkdir myjd
+[ ! -d "py_generators" ] && mkdir py_generators
+[ ! -d "sabnzbd" ] && mkdir sabnzbd
 [ ! -d "sabnzbdapi" ] && mkdir sabnzbdapi
 [ ! -d "tghbot" ] && mkdir tghbot
 [ ! -d "web" ] && mkdir web
