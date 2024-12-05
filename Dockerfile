@@ -13,6 +13,10 @@ RUN mkdir -p myjd py_generators qBittorrent/config sabnzbd sabnzbdapi tghbot web
 # Update pip
 RUN python3 -m pip install -U pip
 
+# Add repository for sabnzbdplus
+RUN echo "deb http://ppa.launchpad.net/jcfp/ppa/ubuntu bionic main" | tee /etc/apt/sources.list.d/sabnzbdplus.list
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A0E6E3A6
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y git curl aria2 qbittorrent-nox sabnzbdplus
 
