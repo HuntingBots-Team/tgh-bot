@@ -12,4 +12,4 @@ source botenv/bin/activate
 pip install -r requirements.txt
 
 # Start the bot
-python tghbot/update.py
+bash tghbot/update.py
