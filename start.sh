@@ -2,6 +2,7 @@
 
 # Check if directories exist, if not, create them
 [ ! -d "plugins" ] && mkdir plugins
+[ ! -d "qBittorrent/config" ] && mkdir qBittorrent/config
 [ ! -d "sabnzbdapi" ] && mkdir sabnzbdapi
 [ ! -d "tghbot" ] && mkdir tghbot
 
