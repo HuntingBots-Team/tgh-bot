@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.10.4-slim-buster
 
 # Set the working directory in the container
 WORKDIR /app
@@ -9,6 +9,9 @@ COPY . /app
 
 # Ensure necessary directories are created
 RUN mkdir -p plugins sabnzbdapi tghbot
+
+# dor updating Old Pip 
+RUN python3 -m pip install -U pip
 
 # Create and activate virtual environment
 RUN python -m venv botenv
