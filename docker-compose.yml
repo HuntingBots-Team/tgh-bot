@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     container_name: tghbot
@@ -11,3 +13,17 @@ services:
       - "8090:8090"
       - "4000:4000"
       - "6090:6090"
+
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    environment:
+      - WEBUI_PORT=8090
+    volumes:
+      - /path/to/config:/config
+      - /path/to/downloads:/downloads
+    ports:
+      - "8090:8090"
+
+volumes:
+  db_data:
