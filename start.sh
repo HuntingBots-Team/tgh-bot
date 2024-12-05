@@ -5,6 +5,7 @@
 [ ! -d "qBittorrent/config" ] && mkdir qBittorrent/config
 [ ! -d "sabnzbdapi" ] && mkdir sabnzbdapi
 [ ! -d "tghbot" ] && mkdir tghbot
+[ ! -d "web" ] && mkdir web
 
 # Activate the virtual environment
 source botenv/bin/activate
