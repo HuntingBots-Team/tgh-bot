@@ -17,4 +17,4 @@ RUN python -m venv botenv
 RUN botenv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Activate virtual environment and start the bot
-CMD ["bash", "-c", "source botenv/bin/activate && python tghbot/update.py"]
+CMD ["bash", "start.sh"]
