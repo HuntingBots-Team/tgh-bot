@@ -10,8 +10,11 @@ COPY . /app
 # Ensure necessary directories are created
 RUN mkdir -p plugins sabnzbdapi tghbot
 
+# Create and activate virtual environment
+RUN python -m venv botenv
+
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN botenv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Activate virtual environment and start the bot
 CMD ["bash", "-c", "source botenv/bin/activate && python tghbot/update.py"]
