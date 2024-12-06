@@ -1,5 +1,5 @@
-from nekozee.filters import command
-from nekozee.handlers import MessageHandler
+from pyrogram.filters import command
+from pyrogram.handlers import MessageHandler
 
 from tghbot import bot
 from tghbot.helper.ext_utils.bot_utils import (
