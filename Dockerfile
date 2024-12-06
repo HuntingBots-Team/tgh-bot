@@ -37,6 +37,9 @@ RUN apt-get update && apt-get install -y gcc build-essential
 # Update pip to the latest version
 RUN python3 -m pip install --upgrade pip
 
+# Remove certain directories if necessary (adjust as needed)
+RUN rm -rf py_generators config.env Dockerfile LICENSE README.md requirements.txt
+
 # Copy the requirements.txt file into the image
 COPY requirements.txt /usr/src/app/
 
