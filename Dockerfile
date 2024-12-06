@@ -7,6 +7,9 @@ WORKDIR /usr/src/app
 # Ensure necessary directories are created and set permissions
 RUN mkdir -p /usr/src/app && chmod 777 /usr/src/app
 
+# Install system dependencies including gcc
+RUN apt-get update && apt-get install -y gcc build-essential
+
 # Update pip to the latest version
 RUN python3 -m pip install --upgrade pip
 
