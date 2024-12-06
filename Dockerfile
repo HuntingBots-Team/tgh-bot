@@ -19,6 +19,9 @@ COPY requirements.txt /usr/src/app/
 # Install dependencies from requirements.txt
 RUN pip install -r /usr/src/app/requirements.txt
 
+# Create and activate virtual environment
+RUN python -m venv botenv
+
 # Copy the rest of your app's source code into the image
 COPY . /usr/src/app/
 
