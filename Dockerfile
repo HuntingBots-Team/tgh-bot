@@ -1,4 +1,4 @@
- # Use an official Python runtime as a parent image
+# Use an official Python runtime as a parent image
 FROM python:3.12.1-slim
 
 # Set the working directory in the container
@@ -13,14 +13,36 @@ RUN apt-get update && apt-get install -y gcc build-essential
 # Update pip to the latest version
 RUN python3 -m pip install --upgrade pip
 
-# Remove certain directories if necessary (adjust as needed)
-RUN rm -rf py_generators config.env Dockerfile LICENSE README.md requirements.txt
+# Copy the requirements.txt file into the image
+COPY requirements.txt /usr/src/app/
+
+# Install dependencies from requirements.txt with specified options
+RUN pip3 install --break-system-packages --no-cache-dir -r /usr/src/app/requirements.txt
+
+# Create and activate virtual environment
+RUN python -m venv botenv
+
+# Copy the rest of your app's source code into the image
+# Use an official Python runtime as a parent image
+FROM python:3.12.1-slim
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Ensure necessary directories are created and set permissions
+RUN mkdir -p /usr/src/app && chmod 777 /usr/src/app
+
+# Install system dependencies including gcc
+RUN apt-get update && apt-get install -y gcc build-essential
+
+# Update pip to the latest version
+RUN python3 -m pip install --upgrade pip
 
 # Copy the requirements.txt file into the image
 COPY requirements.txt /usr/src/app/
 
-# Install dependencies from requirements.txt
-RUN pip install -r /usr/src/app/requirements.txt
+# Install dependencies from requirements.txt with specified options
+RUN pip3 install --break-system-packages --no-cache-dir -r /usr/src/app/requirements.txt
 
 # Create and activate virtual environment
 RUN python -m venv botenv
