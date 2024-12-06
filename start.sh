@@ -9,7 +9,10 @@ if [ -f /usr/src/app/config.env ]; then
 else
   echo "config.env file not found!"
   exit 1
+fi
 
 # Run the update script
-python3 update.py
+python /usr/src/app/update.py
+
+# Run the tghbot module
 python3 -m tghbot
