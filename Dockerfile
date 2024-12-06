@@ -22,7 +22,9 @@ RUN pip install -r /usr/src/app/requirements.txt
 # Create and activate virtual environment
 RUN python -m venv botenv
 
-# Copy the rest of your app's source code into the image
+# Copy config.env file into the image
+COPY config.env /usr/src/app/
+
 COPY . /usr/src/app/
 
 # Remove certain directories if necessary (adjust as needed)
