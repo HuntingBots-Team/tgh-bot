@@ -31,6 +31,5 @@ tenacity
 TgCrypto
 urllib3
 uvloop
-xattr
+yarl
 yt-dlp[default]
-python-dotenv
