@@ -5,14 +5,14 @@ source /usr/src/app/botenv/bin/activate
 
 # Source the environment variables from config.env
 if [ -f /usr/src/app/config.env ]; then
-  export $(cat /usr/src/app/config.env | xargs)
+source /usr/src/app/config.env
 else
-  echo "config.env file not found!"
-  exit 1
+echo "config.env file not found!"
+exit 1
 fi
 
 # Run the update script
-python /usr/src/app/update.py
+python3 /usr/src/app/update.py
 
 # Run the tghbot module
 python3 -m tghbot
