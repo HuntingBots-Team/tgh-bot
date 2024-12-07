@@ -1,10 +1,13 @@
 FROM python:3.10.4-slim
 
-WORKDIR /usr/src/app
-RUN chmod 777 /usr/src/app
+WORKDIR /tghbot/
+
+RUN apt-get update && apt-get upgrade -y
+RUN python3 -m pip install -U pip
+RUN pip3 install --upgrade pip setuptools
 
 COPY requirements.txt .
-RUN pip3 install -U -r requirements.txt
+RUN pip3 install --no-cache-dir -U -r requirements.txt
 
 COPY . .
 
