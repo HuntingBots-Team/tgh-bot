@@ -1,18 +1,11 @@
-FROM python:3.10.4-slim
+FROM HuntingBots/tghbot:HuntingBots
 
-WORKDIR /tghbot/
-
-RUN apt-get update && apt-get upgrade -y
-RUN python3 -m pip install -U pip
-RUN pip3 install --upgrade pip setuptools
+WORKDIR /usr/src/app
+RUN chmod 777 /usr/src/app
 
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -U -r requirements.txt
+RUN botenv/bin/pip3.12 install --no-cache-dir -r requirements.txt
 
 COPY . .
-
-COPY config.evn .
-
-RUN rm -rf py_generators config_sample.env Dockerfile LICENSE README.md requirements.txt
 
 CMD ["bash", "start.sh"]
