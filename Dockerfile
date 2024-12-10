@@ -1,4 +1,4 @@
-FROM dawn001/z_mirror:main
+From python:3.12-slim
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
