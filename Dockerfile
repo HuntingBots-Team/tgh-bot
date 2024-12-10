@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
 COPY requirements.txt .
-RUN botenv/bin/pip3.12 install --no-cache-dir -r requirements.txt
+RUN requirements.txt --break-system-packagesr requirements.txt
 
 COPY . .
 
