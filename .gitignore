@@ -1,4 +1,4 @@
-tgh_env/*
+zee_env/*
 config.env
 *.pyc
 data*
