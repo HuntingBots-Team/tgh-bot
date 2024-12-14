@@ -32,7 +32,7 @@ from os import (
 )
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from qbittorrentapi import Client as qbClient
+from qbittorrentapi import Client as QbClient
 from shutil import rmtree
 from socket import setdefaulttimeout
 from subprocess import (
