@@ -1,12 +1,24 @@
-FROM python:3.12-slim
-
-RUN apt-get update && apt-get install -y build-essential libssl-dev libffi-dev python3-dev gcc && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
-COPY requirements.txt .
-RUN tgt-mirror_env/bin/pip3.12 install --no-cache
-COPY . .
+RUN apt-get -qq update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-add-repository non-free && \
+    apt-get -qq update && \
+    apt-get -qq install -y p7zip-full p7zip-rar aria2 curl pv jq ffmpeg locales python3-lxml && \
+    apt-get purge -y software-properties-common
 
-CMD ["bash", "start.sh"]
+    COPY requirements.txt .
+COPY extract /usr/local/bin
+RUN pip3 uninstall appdirs
+RUN pip3 install appdirs
+RUN chmod +x /usr/local/bin/extract
+RUN pip3 install --no-cache-dir -r requirements.txt
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+COPY . .
+COPY netrc /root/.netrc
+RUN chmod +x aria.sh
