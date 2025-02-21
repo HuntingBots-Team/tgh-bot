@@ -19,7 +19,7 @@ RUN apt-get -y update && DEBIAN_FRONTEND="noninteractive" \
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en"
 
 COPY requirements.txt .
-RUN pip3.12 install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
