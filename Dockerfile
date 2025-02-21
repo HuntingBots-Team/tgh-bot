@@ -16,6 +16,7 @@ RUN apt-get -y update && DEBIAN_FRONTEND="noninteractive" \
     if [[ "$cpu" == "x86_64" ]]; then echo "amd64"; elif [[ "$cpu" == "x86" ]]; \
     then echo "i386"; elif [[ "$cpu" == "aarch64" ]]; then echo "arm64"; else echo $cpu; fi) \
     -o /usr/local/bin/megasdkrest && chmod +x /usr/local/bin/megasdkrest
+
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en"
 
 COPY requirements.txt .
