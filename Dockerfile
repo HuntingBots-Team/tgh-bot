@@ -7,4 +7,5 @@ COPY requirements.txt .
 RUN tgh_env/bin/pip3.12 install --no-cache-dir -r requirements.txt
 
 COPY . .
+
 CMD ["bash", "start.sh"]
