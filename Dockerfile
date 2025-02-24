@@ -4,8 +4,7 @@ WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
 # Ensure tgh_env is available
-RUN apt-get update && apt-get install -y <package-containing-tgh_env> # Replace with the actual package name if available
-# If tgh_env is a script or needs to be copied, do that as well
+RUN apt-get update && apt-get install -y tgh-env# If tgh_env is a script or needs to be copied, do that as well
 # COPY tgh_env /usr/local/bin/tgh_env
 
 COPY requirements.txt .
