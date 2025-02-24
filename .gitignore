@@ -1,4 +1,4 @@
-zee_env/*
+tgh_env/*
 config.env
 *.pyc
 data*
@@ -7,7 +7,7 @@ data*
 *.json
 *.pickle
 .netrc
-Zee_Logs.txt
+TGH_Logs.txt
 accounts/*
 Thumbnails/*
 tokens/*
