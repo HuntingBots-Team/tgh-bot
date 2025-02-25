@@ -2,18 +2,18 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "HuntingBots" ]
+    branches: ["prime"]
   pull_request:
-    branches: [ "HuntingBots" ]
+    branches: ["prime"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0 # Fetch all history for all branches and tags
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
