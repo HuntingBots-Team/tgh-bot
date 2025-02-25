@@ -21,10 +21,9 @@ RUN apt-get update && \
     libdbus-glib-1-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
+    
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN tgh_env/bin/pip3.12 install --no-cache-dir -r requirements.txt
 
 COPY . .
-
 CMD ["bash", "start.sh"]
