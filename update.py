@@ -12,11 +12,8 @@ from logging import (
     info as log_info,
     StreamHandler,
 )
-from os import (
-    environ,
-    path,
-    remove
-)
+from os import environ, path, remove
+from subprocess import run as srun
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from subprocess import run as urun
@@ -91,17 +88,17 @@ if len(UPSTREAM_BRANCH) == 0:
     UPSTREAM_BRANCH = 'main'
 
 if UPSTREAM_REPO is not None:
-    if ospath.exists('.git'):
-        srun(["rm", "-rf", ".git"])
+    if path.exists('.git'):
+        srun(["rm", "-rf", ".git"], check=True)
 
-    update = srun([f"git init -q \
-                     && git config --global user.email doc.adhikari@gmail.com \
-                     && git config --global user.name weebzone \
-                     && git add . \
-                     && git commit -sm update -q \
-                     && git remote add origin {UPSTREAM_REPO} \
-                     && git fetch origin -q \
-                     && git reset --hard origin/{UPSTREAM_BRANCH} -q"], shell=True)
+    update = srun(f"git init -q && \
+                   git config --global user.email doc.adhikari@gmail.com && \
+                   git config --global user.name weebzone && \
+                   git add . && \
+                   git commit -sm update -q && \
+                   git remote add origin {UPSTREAM_REPO} && \
+                   git fetch origin -q && \
+                   git reset --hard origin/{UPSTREAM_BRANCH} -q", shell=True)
 
     repo = UPSTREAM_REPO.split('/')
     UPSTREAM_REPO = f"https://github.com/{repo[-2]}/{repo[-1]}"
