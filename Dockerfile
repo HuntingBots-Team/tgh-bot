@@ -21,7 +21,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy tgh_env script and make it executable
-COPY tgh_env /usr/local/bin/tgh_env
+COPY path/to/tgh_env /usr/local/bin/tgh_env
 RUN chmod +x /usr/local/bin/tgh_env
 
 # Run the tgh_env script
