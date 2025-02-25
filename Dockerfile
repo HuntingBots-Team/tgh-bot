@@ -22,8 +22,9 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
     
+RUN tgh_env  
 COPY requirements.txt .
-RUN tgh_env/bin/pip3.12 install --no-cache-dir -r requirements.txt
+RUN tgh_env/bin/pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 CMD ["bash", "start.sh"]
