@@ -21,3 +21,5 @@ rclone.conf
 accounts.zip
 shorteners.txt
 buttons.txt
+zeeb.session
+zeeb.session-journal
