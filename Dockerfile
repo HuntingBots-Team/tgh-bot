@@ -17,7 +17,10 @@ RUN apt-get update && \
     python3-dev \
     libdbus-1-dev \
     libdbus-glib-1-dev \
-    wget && \
+    wget \
+    unzip \
+    p7zip-full \
+    busybox && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
