@@ -9,31 +9,22 @@ RUN apt-get update && \
     python3 \
     python3-pip \
     qbittorrent-nox \
+    # Required for PyGObject and related packages
     python3-gi \
     python3-gi-cairo \
     libcairo2-dev \
     libgirepository1.0-dev \
     pkg-config \
     python3-dev \
+    # Required for dbus-python
     libdbus-1-dev \
     libdbus-glib-1-dev \
-    wget \
-    unzip \
-    p7zip-full \
-    busybox && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget https://rclone.org/install.sh
-RUN bash install.sh
-
-RUN mkdir /app/gautam
-RUN wget -O /app/gautam/gclone.gz https://git.io/JJMSG
-RUN gzip -d /app/gautam/gclone.gz
-RUN chmod 0775 /app/gautam/gclone
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-CMD ["bash","start.sh"]
+CMD ["bash", "start.sh"]
