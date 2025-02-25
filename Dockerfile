@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM HuntingBots-tghbot:latest
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
