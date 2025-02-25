@@ -1,6 +1,31 @@
+version: '3'
+
 services:
   app:
     build: .
     command: bash start.sh
-    restart: on-failure
+    restart: unless-stopped
     network_mode: "host"
+    env_file:
+      - config.env
+    volumes:
+      # Service data directories
+      - ./data/aria2:/usr/src/app/data/aria2
+      - ./data/qbittorrent:/usr/src/app/data/qbittorrent
+      - ./data/sabnzbd:/usr/src/app/data/sabnzbd
+      # Downloads directory
+      - ./downloads:/usr/src/app/downloads
+      # For persistence between updates
+      - ./config.env:/usr/src/app/config.env:ro
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    ports:
+      - "6800:6800"  # aria2 RPC
+      - "8070:8070"  # sabnzbd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

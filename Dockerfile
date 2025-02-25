@@ -3,9 +3,15 @@ FROM ubuntu:22.04
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
+# Create necessary directories
+RUN mkdir -p /usr/src/app/sabnzbd \
+    && mkdir -p /usr/src/app/data/aria2 \
+    && mkdir -p /usr/src/app/data/qbittorrent \
+    && mkdir -p /usr/src/app/data/sabnzbd
+
 # Install system dependencies first
 RUN apt-get update && \
-    apt-get install -y \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
     python3 \
     python3-pip \
     curl \
@@ -24,7 +30,8 @@ RUN apt-get update && \
     libdbus-1-dev \
     libdbus-glib-1-dev \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/bin/aria2c /usr/local/bin/aria2c
 
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
