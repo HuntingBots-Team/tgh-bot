@@ -1,3 +1,3 @@
 source tgh_env/bin/activate
-python3 update.py
-python3 -m tghbot 
+chmod +x extract
+python3 -m tghbot
