@@ -1406,7 +1406,7 @@ getLogger("urllib3").setLevel(INFO)
 getLogger("apscheduler").setLevel(ERROR)
 getLogger("httpx").setLevel(ERROR)
 getLogger("pymongo").setLevel(ERROR)
-getLogger("nekozee").setLevel(ERROR)
+getLogger("pyrogram").setLevel(ERROR)
 
 bot_start_time = time()
 
