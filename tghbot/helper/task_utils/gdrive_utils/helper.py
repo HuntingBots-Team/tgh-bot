@@ -258,7 +258,7 @@ class GoogleDriveHelper:
     def create_directory(self, directory_name, dest_id):
         file_metadata = {
             "name": directory_name,
-            "description": f"Uploaded using Zee by {self.listener.tag}, ID: {self.listener.message.from_user.id}", # type: ignore
+            "description": f"Uploaded using TGHLeechSupport by {self.listener.tag}, ID: {self.listener.message.from_user.id}", # type: ignore
             "mimeType": self.G_DRIVE_DIR_MIME_TYPE,
         }
         if dest_id is not None:
