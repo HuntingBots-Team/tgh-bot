@@ -16,9 +16,9 @@ with Client(
     api_id=API_KEY,
     api_hash=API_HASH,
     phone_number=PHONE_NO,
-    app_version="@Z_Mirror Session",
-    device_model="@Z_Mirror Bot",
-    system_version="@Z_Mirror Server",
+    app_version="@TGHLeechSupport Session",
+    device_model="@TGHLeechSupport Bot",
+    system_version="@TGHLeechSupport Server",
 ) as app:
     app.send_message("me",
                      "**Pyrogram Session String**:\n\n"
