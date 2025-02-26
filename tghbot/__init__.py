@@ -68,7 +68,7 @@ set_event_loop(bot_loop)
 basicConfig(
     format="%(levelname)s | From %(name)s -> %(module)s line no: %(lineno)d | %(message)s",
     handlers=[
-        FileHandler("Zee_Logs.txt"),
+        FileHandler("TGH_Logs.txt"),
         StreamHandler()
     ],
     level=INFO,
