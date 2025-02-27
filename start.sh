@@ -28,8 +28,5 @@ bash aria-nox-nzb.sh
 # Give services more time to initialize fully
 sleep 15
 
-# Disable git operations for now to avoid config.env issues
-export UPSTREAM_REPO=""
-
-# Start the bot
-python3 -m tghbot
+# Update and start the bot
+python3 update.py && python3 -m tghbot
