@@ -124,7 +124,7 @@ if [ ! -f "/usr/src/app/data/sabnzbd/sabnzbd.ini" ]; then
     log_msg "Initializing SABnzbd configuration..."
     cat > /usr/src/app/data/sabnzbd/sabnzbd.ini << EOF
 [misc]
-host = 0.0.0.0
+host = localhost
 port = 8070
 host_whitelist = *
 api_key = 1234567890
