@@ -33,7 +33,6 @@ from os import (
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from qbittorrentapi import Client as QbClient
-from sabnzbdapi import SabnzbdClient
 from shutil import rmtree
 from socket import setdefaulttimeout
 from subprocess import (
@@ -44,6 +43,7 @@ from sys import exit
 from time import time
 from tzlocal import get_localzone
 from uvloop import install
+from sabnzbdapi import SabnzbdClient
 
 # from faulthandler import enable as faulthandler_enable
 # faulthandler_enable()
@@ -55,9 +55,9 @@ getLogger("qbittorrentapi").setLevel(INFO)
 getLogger("requests").setLevel(INFO)
 getLogger("urllib3").setLevel(INFO)
 getLogger("apscheduler").setLevel(ERROR)
+getLogger("pyrogram").setLevel(ERROR)
 getLogger("httpx").setLevel(ERROR)
 getLogger("pymongo").setLevel(ERROR)
-getLogger("pyrogram").setLevel(ERROR)
 
 bot_start_time = time()
 
@@ -1321,7 +1321,6 @@ def get_qb_options():
     else:
         qb_opt = {**qbit_options}
         qbittorrent_client.app_set_preferences(qb_opt)
-
 
 get_qb_options()
 
