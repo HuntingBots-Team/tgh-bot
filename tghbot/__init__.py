@@ -1268,8 +1268,8 @@ qbittorrent_client = QbClient(
 BASE += ("G8k7bAblAEkiZDyAAjM6a")
 
 sabnzbd_client = SabnzbdClient(
-    host="http://localhost",
-    api_key="zee",
+    host=environ.get("SABNZBD_HOST", "http://localhost:8070"),
+    api_key=environ.get("SABNZBD_API_KEY", "1234567890"),
     port="8070",
 )
 

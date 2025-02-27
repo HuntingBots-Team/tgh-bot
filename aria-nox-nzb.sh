@@ -123,12 +123,48 @@ if [ ! -f "/usr/src/app/data/sabnzbd/sabnzbd.ini" ]; then
 [misc]
 host = 0.0.0.0
 port = 8070
+host_whitelist = *
+api_key = 1234567890
+username = 
+password = 
+download_dir = /usr/src/app/downloads/incomplete
+complete_dir = /usr/src/app/downloads/complete
+
+[server-main]
+host = localhost
+port = 8070
+timeout = 60
+username = 
+password = 
+connections = 8
+ssl = 0
+enable = 1
 EOF
 fi
 
-sabnzbdplus -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -b 0 -d -l 0
+# Create download directories
+mkdir -p /usr/src/app/downloads/incomplete
+mkdir -p /usr/src/app/downloads/complete
 
-if ! wait_for_service 8070 "SABnzbd"; then
+# Start SABnzbd with proper permissions
+sabnzbdplus -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -d -l 0
+
+# Wait for SABnzbd to fully initialize
+log_msg "Waiting for SABnzbd API to be ready..."
+max_attempts=30
+attempt=1
+while [ $attempt -le $max_attempts ]; do
+    if curl -s "http://localhost:8070/api?mode=version&output=json&apikey=1234567890" | grep -q "version"; then
+        log_msg "SABnzbd API is ready"
+        break
+    fi
+    log_msg "Waiting for SABnzbd API (attempt $attempt/$max_attempts)..."
+    sleep 2
+    attempt=$((attempt + 1))
+done
+
+if [ $attempt -gt $max_attempts ]; then
+    log_msg "ERROR: SABnzbd API failed to respond after $max_attempts attempts"
     exit 1
 fi
 
