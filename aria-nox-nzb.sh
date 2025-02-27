@@ -28,7 +28,7 @@ kill_if_running() {
 
 # Function to check if a port is in use
 is_port_in_use() {
-    nc -z localhost $1 >/dev/null 2>&1
+    timeout 1 bash -c ">/dev/tcp/localhost/$1" >/dev/null 2>&1
     return $?
 }
 
@@ -39,7 +39,7 @@ wait_for_service() {
     local max_attempts=30
     local attempt=1
 
-    while ! nc -z localhost $port && [ $attempt -le $max_attempts ]; do
+    while ! is_port_in_use "$port" && [ $attempt -le $max_attempts ]; do
         log_msg "Waiting for $service to be ready (attempt $attempt/$max_attempts)..."
         sleep 2
         attempt=$((attempt + 1))

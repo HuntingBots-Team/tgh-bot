@@ -19,6 +19,7 @@ RUN apt-get update && \
     git \
     qbittorrent-nox \
     sabnzbdplus \
+    netcat-openbsd \
     # Required for PyGObject and related packages
     python3-gi \
     python3-gi-cairo \
