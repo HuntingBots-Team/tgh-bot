@@ -8,11 +8,13 @@ services:
       - config.env
     volumes:
       # Service data directories
-      - ./data/aria2:/usr/src/app/data/aria2
-      - ./data/qbittorrent:/usr/src/app/data/qbittorrent
-      - ./data/sabnzbd:/usr/src/app/data/sabnzbd
-      # Downloads directory
-      - ./downloads:/usr/src/app/downloads
+      - ./data/aria2:/usr/src/app/data/aria2:rw
+      - ./data/qbittorrent:/usr/src/app/data/qbittorrent:rw
+      - ./data/sabnzbd:/usr/src/app/data/sabnzbd:rw
+      # Downloads directory with subdirectories
+      - ./downloads:/usr/src/app/downloads:rw
+      - ./downloads/incomplete:/usr/src/app/downloads/incomplete:rw
+      - ./downloads/complete:/usr/src/app/downloads/complete:rw
       # For persistence between updates
       - ./config.env:/usr/src/app/config.env:ro
       # qBittorrent config persistence

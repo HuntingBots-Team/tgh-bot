@@ -117,6 +117,9 @@ fi
 # Start SABnzbd
 log_msg "Starting SABnzbd..."
 mkdir -p /usr/src/app/data/sabnzbd
+mkdir -p /usr/src/app/downloads/incomplete
+mkdir -p /usr/src/app/downloads/complete
+
 if [ ! -f "/usr/src/app/data/sabnzbd/sabnzbd.ini" ]; then
     log_msg "Initializing SABnzbd configuration..."
     cat > /usr/src/app/data/sabnzbd/sabnzbd.ini << EOF
@@ -129,6 +132,19 @@ username =
 password = 
 download_dir = /usr/src/app/downloads/incomplete
 complete_dir = /usr/src/app/downloads/complete
+auto_browser = 0
+check_new_rel = 0
+replace_spaces = 1
+web_dir = Glitter
+url_base = 
+enable_https = 0
+https_port = 9090
+https_cert = server.cert
+https_key = server.key
+https_chain = 
+language = en
+web_color = Default
+web_color2 = Dark
 
 [server-main]
 host = localhost
@@ -139,15 +155,14 @@ password =
 connections = 8
 ssl = 0
 enable = 1
+optional = 0
+retention = 0
 EOF
 fi
 
-# Create download directories
-mkdir -p /usr/src/app/downloads/incomplete
-mkdir -p /usr/src/app/downloads/complete
-
 # Start SABnzbd with proper permissions
-sabnzbdplus -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -d -l 0
+chmod 777 /usr/src/app/data/sabnzbd/sabnzbd.ini
+sabnzbdplus -b 0 -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -l 0
 
 # Wait for SABnzbd to fully initialize
 log_msg "Waiting for SABnzbd API to be ready..."
