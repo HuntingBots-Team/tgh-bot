@@ -103,7 +103,8 @@ if UPSTREAM_REPO is not None:
     repo = UPSTREAM_REPO.split('/')
     UPSTREAM_REPO = f"https://github.com/{repo[-2]}/{repo[-1]}"
     if update.returncode == 0:
-        log_info('Successfully updated with latest commits !!')
+        log_info("Successfully updated...")
+        log_info("Thanks For Using @TGHThingLeech_bot")
     else:
         log_error('Something went Wrong ! Retry or Ask Support !')
     log_info(f'UPSTREAM_REPO: {UPSTREAM_REPO} | UPSTREAM_BRANCH: {UPSTREAM_BRANCH}')
