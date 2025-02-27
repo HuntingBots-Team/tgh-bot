@@ -1254,6 +1254,8 @@ if not ospath.exists("accounts"):
 qbittorrent_client = QbClient(
     host="localhost",
     port=8090,
+    username="admin",
+    password="adminadmin",
     VERIFY_WEBUI_CERTIFICATE=False,
     REQUESTS_ARGS={"timeout": (30, 60)},
     HTTPADAPTER_ARGS={
