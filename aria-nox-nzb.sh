@@ -145,6 +145,24 @@ https_chain =
 language = en
 web_color = Default
 web_color2 = Dark
+ionice = 0
+nice = 0
+direct_unpack = 1
+ignore_unrar_dates = 1
+allow_duplicate_files = 0
+enable_par_cleanup = 1
+enable_unrar = 1
+enable_unzip = 1
+enable_7zip = 1
+enable_filejoin = 1
+enable_tsjoin = 1
+flat_unpack = 0
+pause_on_post_processing = 0
+quick_check = 1
+replace_dots = 0
+safe_postproc = 1
+script_can_fail = 0
+unwanted_extensions = ,
 
 [server-main]
 host = localhost
@@ -160,9 +178,15 @@ retention = 0
 EOF
 fi
 
+# Set proper permissions
+chmod -R 777 /usr/src/app/data/sabnzbd
+chmod -R 777 /usr/src/app/downloads
+
 # Start SABnzbd with proper permissions
-chmod 777 /usr/src/app/data/sabnzbd/sabnzbd.ini
-sabnzbdplus -b 0 -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -l 0
+sabnzbdplus -d -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -l 0 -b 0
+
+# Wait a moment for SABnzbd to initialize
+sleep 5
 
 # Wait for SABnzbd to fully initialize
 log_msg "Waiting for SABnzbd API to be ready..."

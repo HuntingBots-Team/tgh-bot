@@ -30,6 +30,11 @@ RUN apt-get update && \
     # Required for dbus-python
     libdbus-1-dev \
     libdbus-glib-1-dev \
+    # Required for SABnzbd
+    par2 \
+    unrar \
+    p7zip-full \
+    unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/aria2c /usr/local/bin/aria2c
