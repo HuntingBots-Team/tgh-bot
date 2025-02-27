@@ -221,7 +221,7 @@ class GoogleDriveUpload(GoogleDriveHelper):
         # File body description
         file_metadata = {
             "name": file_name,
-            "description": f"Uploaded using Zee by {self.listener.tag}, ID: {self.listener.message.from_user.id}",
+            "description": f"Uploaded using TGHLeechSupport by {self.listener.tag}, ID: {self.listener.message.from_user.id}",
             "mimeType": mime_type,
         }
         if dest_id is not None:

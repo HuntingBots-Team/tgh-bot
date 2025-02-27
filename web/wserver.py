@@ -66,7 +66,7 @@ aria2 = ariaAPI(
 basicConfig(
     format="%(levelname)s | From %(name)s -> %(module)s line no: %(lineno)d | %(message)s",
     handlers=[
-        FileHandler("Zee_Logs.txt"),
+        FileHandler("TGH_Logs.txt"),
         StreamHandler()
     ],
     level=INFO,
@@ -894,7 +894,7 @@ def set_priority(id_):
 
 @app.route("/")
 def homepage():
-    return "<h1>Visit my channel <a href='https://telegram.me/z_mirror'>@Z_Mirror</a>on Telegram By <a href='https://telegram.me/dawn_bharat'>@Dawn_Bharat</a></h1>"
+    return "<h1>Visit my channel <a href='https://telegram.me/z_mirror'>@Z_Mirror</a>on Telegram By <a href='https://telegram.me/helpcenterbot1'>@helpcenterbot1</a></h1>"
 
 
 @app.errorhandler(Exception)
