@@ -20,9 +20,12 @@ from os import (
 from pyrogram import filters
 from pyrogram.handlers import (
     MessageHandler,
-    CallbackQueryHandler
+    CallbackQueryHandler,
+    StopPropagation,
+    ContinuePropagation
 )
-from pyrogram.errors import ListenerCanceled
+from pyrogram.errors import StopTransmission
+from pyrogram.errors.exceptions.bad_request_400 import BadRequest
 
 from tghbot import (
     IS_PREMIUM_USER,
@@ -1078,17 +1081,22 @@ async def update_private_file(message, pre_message):
 
 
 async def event_handler(client, query, document=False):
-    event_filter = (
-        filters.text | filters.document
-        if document
-        else filters.text
-    )
-    return await client.listen(
-        chat_id=query.message.chat.id,
-        user_id=query.from_user.id,
-        filters=event_filter,
-        timeout=60,
-    )
+    try:
+        event_filter = (
+            filters.text | filters.document
+            if document
+            else filters.text
+        )
+        return await client.listen(
+            chat_id=query.message.chat.id,
+            user_id=query.from_user.id,
+            filters=event_filter,
+            timeout=60,
+        )
+    except StopTransmission:
+        raise StopPropagation
+    except BadRequest:
+        raise ContinuePropagation
 
 @new_task
 async def edit_bot_settings(client, query):
@@ -1392,10 +1400,8 @@ async def edit_bot_settings(client, query):
                 query,
                 True
             )
-        except ListenerTimeout:
+        except (StopTransmission, BadRequest):
             await update_buttons(message)
-        except ListenerStopped:
-            pass
         else:
             await update_private_file(
                 event,
@@ -1416,13 +1422,11 @@ async def edit_bot_settings(client, query):
                 client,
                 query
             )
-        except ListenerTimeout:
+        except (StopTransmission, BadRequest):
             await update_buttons(
                 message,
                 "var"
             )
-        except ListenerStopped:
-            pass
         else:
             await edit_variable(
                 event,
@@ -1495,13 +1499,11 @@ async def edit_bot_settings(client, query):
                 client,
                 query
             )
-        except ListenerTimeout:
+        except (StopTransmission, BadRequest):
             await update_buttons(
                 message,
                 "aria"
             )
-        except ListenerStopped:
-            pass
         else:
             await edit_aria(
                 event,
@@ -1543,13 +1545,11 @@ async def edit_bot_settings(client, query):
                 client,
                 query
             )
-        except ListenerTimeout:
+        except (StopTransmission, BadRequest):
             await update_buttons(
                 message,
                 "qbit"
             )
-        except ListenerStopped:
-            pass
         else:
             await edit_qbit(
                 event,
@@ -1591,13 +1591,11 @@ async def edit_bot_settings(client, query):
                 client,
                 query
             )
-        except ListenerTimeout:
+        except (StopTransmission, BadRequest):
             await update_buttons(
                 message,
                 "nzb"
             )
-        except ListenerStopped:
-            pass
         else:
             await edit_nzb(
                 event,
@@ -1670,13 +1668,11 @@ async def edit_bot_settings(client, query):
                 client,
                 query
             )
-        except ListenerTimeout:
+        except (StopTransmission, BadRequest):
             await update_buttons(
                 message,
                 data[1]
             )
-        except ListenerStopped:
-            pass
         else:
             await edit_nzb_server(
                 event,

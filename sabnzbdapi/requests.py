@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 from httpx import (
     AsyncClient,
     DecodingError,

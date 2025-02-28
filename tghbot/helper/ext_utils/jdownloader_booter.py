@@ -17,10 +17,10 @@ from tghbot.helper.ext_utils.bot_utils import (
 cmd_exec,
 new_task
 )
-from myjd import MyJdApi
+from myjdapi import Myjdapi
 
 
-class JDownloader(MyJdApi):
+class JDownloader(Myjdapi):
     def __init__(self):
         super().__init__()
         self._username = ""

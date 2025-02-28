@@ -52,6 +52,6 @@ RUN chmod +x start.sh aria-nox-nzb.sh && \
     ln -sf /usr/src/app/tghbot/helper/ext_utils/telegraph_helper.py /usr/src/app/tghbot/helper/telegram_helper/telegraph_helper.py && \
     pip3 install -e . && \
     python3 -c "from tghbot.helper.telegram_helper.telegraph_helper import telegraph" && \
-    python3 -c "from myjd import MyJdApi"
+    python3 -c "from myjdapi import Myjdapi"
 
 CMD ["bash", "start.sh"]
