@@ -17,7 +17,7 @@ from tghbot.helper.ext_utils.bot_utils import (
 cmd_exec,
 new_task
 )
-from tghbot.plugins.myjd import MyJdApi
+from myjd import MyJdApi
 
 
 class JDownloader(MyJdApi):
