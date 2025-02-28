@@ -253,14 +253,14 @@ async def get_readable_message(
         ):
             msg += (
                 f"<b><i>\n#TGH Work Processing{index + start_position}: "
-                f"{escape(f"{task.name()}")}\n</i></b>"
+                f"{escape(task.name())}\n</i></b>"
                 if elapse <= config_dict["AUTO_DELETE_MESSAGE_DURATION"]
                 else f"\n<b>TGH Processing{index + start_position}...(Processing)</b>"
             )
         else:
             msg += (
                 f"<b><i>\n#TGH Work Processing{index + start_position}: "
-                f"{escape(f"{task.name()}")}\n</i></b>"
+                f"{escape(task.name())}\n</i></b>"
             )
         if tstatus not in [
             MirrorStatus.STATUS_SEEDING,

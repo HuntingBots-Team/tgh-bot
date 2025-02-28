@@ -22,10 +22,7 @@ from pyrogram.handlers import (
     MessageHandler,
     CallbackQueryHandler
 )
-from pyrogram.errors import (
-    ListenerTimeout,
-    ListenerStopped
-)
+from pyrogram.errors import ListenerCanceled
 
 from tghbot import (
     IS_PREMIUM_USER,
@@ -253,7 +250,7 @@ async def get_buttons(id=None, key=None, edit_type=None):
             if key == "newser":
                 msg = "Send one server as dictionary {}, like in config.env without []. Timeout: 60 sec"
             else:
-                msg = f"Send a valid value for {key} in server {config_dict["USENET_SERVERS"][index]["name"]}. Current value is '{config_dict["USENET_SERVERS"][index][key]}'. Timeout: 60 sec"
+                msg = f"Send a valid value for {key} in server {config_dict['USENET_SERVERS'][index]['name']}. Current value is '{config_dict['USENET_SERVERS'][index][key]}'. Timeout: 60 sec"
     elif key == "var":
         for k in list(config_dict.keys())[start : 10 + start]:
             buttons.data_button(
@@ -1695,7 +1692,7 @@ async def edit_bot_settings(client, query):
             "nzbsevar",
             ""
         ))
-        value = f"{config_dict["USENET_SERVERS"][index][data[2]]}"
+        value = f"{config_dict['USENET_SERVERS'][index][data[2]]}"
         if len(value) > 200:
             await query.answer()
             with BytesIO(str.encode(value)) as out_file:
@@ -1737,21 +1734,12 @@ async def edit_bot_settings(client, query):
         await query.answer()
         filename = data[2].rsplit(".zip", 1)[0]
         if await aiopath.exists(filename):
-            await (
-                await create_subprocess_shell(
-                    f"git add -f {filename} \
-                    && git commit -sm botsettings -q \
-                    && git push origin {config_dict["UPSTREAM_BRANCH"]} -qf"
-                )
-            ).wait()
-        else:
-            await (
-                await create_subprocess_shell(
-                    f"git rm -r --cached {filename} \
-                    && git commit -sm botsettings -q \
-                    && git push origin {config_dict["UPSTREAM_BRANCH"]} -qf"
-                )
-            ).wait()
+            branch = config_dict['UPSTREAM_BRANCH']
+            if await aiopath.exists(filename):
+                cmd = "git add -f {} && git commit -sm botsettings -q && git push origin {} -qf".format(filename, branch)
+            else:
+                cmd = "git rm -r --cached {} && git commit -sm botsettings -q && git push origin {} -qf".format(filename, branch)
+            await (await create_subprocess_shell(cmd)).wait()
         await delete_message(message.reply_to_message)
         await delete_message(message)
 
