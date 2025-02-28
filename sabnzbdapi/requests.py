@@ -100,6 +100,7 @@ class SabnzbdClient(JobFunctions):
         }
         retries = 5
         response = None
+        params = params or {}
         for retry_count in range(retries):
             try:
                 res = await session.request(
@@ -111,13 +112,34 @@ class SabnzbdClient(JobFunctions):
                     },
                     **requests_kwargs,
                 )
-                response = res.json()
+                
+                # Check HTTP status code
+                if res.status_code != 200:
+                    raise APIConnectionError(
+                        f"API returned unexpected status {res.status_code}. Response: {res.text}"
+                    )
+                
+                # Verify JSON content type
+                content_type = res.headers.get("Content-Type", "")
+                if "application/json" not in content_type:
+                    raise DecodingError(
+                        f"Unexpected Content-Type '{content_type}'. Response: {res.text}"
+                    )
+                
+                # Parse JSON with explicit error handling
+                try:
+                    response = res.json()
+                except JSONDecodeError as e:
+                    raise DecodingError(
+                        f"Failed to parse JSON response: {e}\nResponse text: {res.text}"
+                    ) from e
+                    
                 break
-            except DecodingError as e:
-                raise DecodingError(f"Failed to decode response!: {res.text}") from e
-            except APIConnectionError as err:
+            except (DecodingError, JSONDecodeError) as e:
                 if retry_count >= (retries - 1):
-                    raise err
+                    raise APIConnectionError(
+                        f"Final retry failed after {retries} attempts. Last error: {str(e)}"
+                    ) from e
         if response is None:
             raise APIConnectionError("Failed to connect to API!")
         return response
