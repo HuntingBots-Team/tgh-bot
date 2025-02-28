@@ -39,12 +39,18 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/aria2c /usr/local/bin/aria2c
 
+# Set Python path and install requirements
+ENV PYTHONPATH=/usr/src/app
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt && \
+    pip3 install --no-cache-dir telegraph
 
 COPY . .
 
-# Make scripts executable
-RUN chmod +x start.sh aria-nox-nzb.sh
+# Make scripts executable, create symlink, and install package
+RUN chmod +x start.sh aria-nox-nzb.sh && \
+    ln -sf /usr/src/app/tghbot/helper/ext_utils/telegraph_helper.py /usr/src/app/tghbot/helper/telegram_helper/telegraph_helper.py && \
+    pip3 install -e . && \
+    python3 -c "from tghbot.helper.telegram_helper.telegraph_helper import telegraph"
 
 CMD ["bash", "start.sh"]

@@ -26,7 +26,7 @@ from tghbot.helper.ext_utils.help_messages import (
     MIRROR_HELP_DICT,
     CLONE_HELP_DICT,
 )
-from tghbot.helper.telegram_helper.telegraph_helper import telegraph
+from tghbot.helper.ext_utils.telegraph_helper import telegraph
 from tghbot.helper.telegram_helper.button_build import ButtonMaker
 from tghbot.helper.telegram_helper.bot_commands import BotCommands
 
