@@ -1349,7 +1349,12 @@ else:
 
 async def get_nzb_options():
     global nzb_options
-    nzb_options = (await sabnzbd_client.get_config())["config"]["misc"]
+    try:
+        nzb_options = (await sabnzbd_client.get_config())["config"]["misc"]
+    except Exception as e:
+        nzb_options = {}
+        log_warning(f"SABnzbd disabled due to error: {e}")
 
 
-bot_loop.run_until_complete(get_nzb_options())
+# SABnzbd get_nzb_options call disabled
+# bot_loop.run_until_complete(get_nzb_options())
