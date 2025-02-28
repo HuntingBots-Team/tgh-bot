@@ -1268,7 +1268,7 @@ qbittorrent_client = QbClient(
 BASE += ("G8k7bAblAEkiZDyAAjM6a")
 
 sabnzbd_client = SabnzbdClient(
-    host="http://localhost",
+    host="http://127.0.0.1",
     port=8070,
     api_key="1234567890",
 )
