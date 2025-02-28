@@ -124,7 +124,7 @@ if [ ! -f "/usr/src/app/data/sabnzbd/sabnzbd.ini" ]; then
     log_msg "Initializing SABnzbd configuration..."
     cat > /usr/src/app/data/sabnzbd/sabnzbd.ini << EOF
 [misc]
-host = localhost
+host = 127.0.0.1
 port = 8070
 host_whitelist = *
 api_key = 1234567890
@@ -183,7 +183,7 @@ chmod -R 777 /usr/src/app/data/sabnzbd
 chmod -R 777 /usr/src/app/downloads
 
 # Start SABnzbd with proper permissions
-sabnzbdplus -d -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s 0.0.0.0:8070 -l 0 -b 0
+sabnzbdplus -d -f /usr/src/app/data/sabnzbd/sabnzbd.ini -s localhost:8070 -l 0 -b 0
 
 # Wait a moment for SABnzbd to initialize
 sleep 5
