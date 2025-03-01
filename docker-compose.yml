@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: tgh_mirror
     build: .
     command: bash start.sh
     restart: unless-stopped
